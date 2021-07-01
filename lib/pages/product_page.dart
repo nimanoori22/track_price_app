@@ -41,7 +41,6 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     productList = getProduct();
-    print(productList);
   }
 
   @override
@@ -131,7 +130,7 @@ class _HomeState extends State<Home> {
                       }else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       }
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   ),
                 ]
