@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:digi/mysecrets.dart';
+import 'package:digi/widgets/navbar.dart';
 
 class Home extends StatefulWidget {
   const Home({ Key? key }) : super(key: key);
@@ -48,6 +49,11 @@ class _HomeState extends State<Home> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text('محصولات'),
+          centerTitle: true,
+        ),
+        drawer: const NavDrawer(),
         backgroundColor: const Color(0xffffffff),
         body: SingleChildScrollView(
           // padding: const EdgeInsets.all(5.0),

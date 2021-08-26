@@ -3,6 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'package:digi/services/user.dart';
+import 'package:digi/services/secure_storage.dart';
+
+final SecureStorage secureStorage = SecureStorage();
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -37,7 +42,9 @@ class _SignUpState extends State<SignUp> {
         'password': password
       }),
     );
-    print(response.body);
+    Map<String, dynamic> token = jsonDecode(response.body);
+    //todo check token
+    secureStorage.writeSecureData('token', token["auth_token"]);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -90,6 +97,7 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
                     onPressed: (){
+                      print(User.isLoggedIn());
                       if(_formKey.currentState!.validate()){
                         _formKey.currentState!.save();
                         sendCredentials(email, password);
